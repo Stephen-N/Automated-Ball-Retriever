@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Service Ball Retriever</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+    <style>
+        /* * {
+            border: 1px solid red;
+        } */
+
+        body {
+            margin: 0px;
+            width: 100vw;
+            height: 100vh;
+            overflow: auto;
+            background-color: antiquewhite;
+        }
+
+        .block {
+            background-color: #6CC;
+            padding: 20px;
+
+        }
+
+        .top-buffer {
+            margin-top: 10px;
+        }
+
+        .resize {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+    <script>
+        var timestamp = '<?= time(); ?>';
+
+        function updateTime() {
+            $('#time').html(Date(timestamp));
+            timestamp++;
+        }
+
+        $(function () {
+            setInterval(updateTime, 1000);
+            setInterval(showOptions(localStorage.getItem()), 1000);
+        });
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("demo").innerHTML = this.responseText;
+            }
+        };
+
+        function go() {
+            xhttp.open("GET", "php/gostop.php?q=go", true);
+            xhttp.send();
+        }
+        function stop() {
+            xhttp.open("GET", "php/gostop.php?q=stop", true);
+            xhttp.send();
+        }
+    </script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">Service Ball Retriever</span>
+    </nav>
+
+    <div class="container">
+        <div class="row top-buffer">
+            <div class="col text-center">
+                <button type="button" class="block btn btn-primary btn-lg btn-block btn-success" id='go'
+                    onclick="go()">Go</button>
+            </div>
+        </div>
+        <div class="row top-buffer">
+            <div class="col text-center">
+                <button type="button" class="block block btn btn-primary btn-lg btn-block btn-light">
+                    <i class="fa fa-power-off" style="font-size:48px;color:red"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row top-buffer">
+            <div class="col text-center">
+                <button type="button" class="block block btn btn-primary btn-lg btn-block btn-danger" id='stop'
+                    onclick="stop()">Stop</button>
+            </div>
+        </div>
+        <div class="row top-buffer">
+            <div class="col-6 text-center medium-size">
+                <a href="php/getstatistics.php">
+                    <button type="button" class="block btn btn-lg btn-block" style="color:white;">Statistics</button>
+                </a>
+            </div>
+            <div class=" col-6 text-center">
+                <a href="app/app.html">
+                    <button type="button" class="block btn btn-lg btn-block" style="color:white;">GUI</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-center">
+        <p id="demo"></p>
+        <img src="images/sbr.png" class="resize">
+        <p id="time"></p>
+    </div>
+
+</body>
+
+</html>

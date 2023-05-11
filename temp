@@ -1,0 +1,6 @@
+ultra1(SHM object) {
+pinmode...
+
+while...
+obj.write(distx)
+}

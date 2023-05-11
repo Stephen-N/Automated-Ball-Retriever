@@ -1,0 +1,5 @@
+CREATE TABLE statistics (id SERIAL PRIMARY KEY, timestamp TIMESTAMP default current_timestamp, distance FLOAT, moving BOOL, ir FLOAT, magnet1 BOOL, magnet2 BOOL, photo1 BOOL, photo2 BOOL);
+
+CREATE TABLE statistics (id SERIAL PRIMARY KEY, timestamp TIMESTAMP default current_timestamp, distance FLOAT, us1 FLOAT, us2 FLOAT, us3 FLOAT, us4 FLOAT, us5 FLOAT, photo1 BOOL, photo2 BOOL);
+
+sudo -u postgres psql
